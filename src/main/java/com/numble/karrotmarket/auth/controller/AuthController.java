@@ -1,8 +1,8 @@
 package com.numble.karrotmarket.auth.controller;
 
 import com.numble.karrotmarket.auth.service.AuthService;
-import com.numble.karrotmarket.user.controller.dto.SignInRequest;
-import com.numble.karrotmarket.user.controller.dto.SignUpRequest;
+import com.numble.karrotmarket.auth.controller.dto.SignInRequest;
+import com.numble.karrotmarket.auth.controller.dto.SignUpRequest;
 import com.numble.karrotmarket.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;

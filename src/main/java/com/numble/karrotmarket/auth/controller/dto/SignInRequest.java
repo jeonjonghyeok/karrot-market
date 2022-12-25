@@ -1,4 +1,4 @@
-package com.numble.karrotmarket.user.controller.dto;
+package com.numble.karrotmarket.auth.controller.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

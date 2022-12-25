@@ -1,14 +1,16 @@
 package com.numble.karrotmarket.user.service;
 
 import com.numble.karrotmarket.common.exception.error.ErrorCode;
-import com.numble.karrotmarket.user.controller.dto.SignUpRequest;
 import com.numble.karrotmarket.user.domain.Role;
 import com.numble.karrotmarket.user.domain.User;
+import com.numble.karrotmarket.user.dto.CreateUserDto;
 import com.numble.karrotmarket.user.repository.UserRepository;
 import java.time.LocalDateTime;
+import java.util.InputMismatchException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,28 +18,36 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User getUserByEmail(final String email) {
         return userRepository.findByEmail(email).orElseThrow(() ->
             new UsernameNotFoundException(ErrorCode.USER_NOT_FOUND.getMessage()));
     }
 
-    public User createUser(final SignUpRequest request) {
-        if (userRepository.existsByEmail(request.getEmail())) {
+    public User createUser(final CreateUserDto createUserDto) {
+        if (userRepository.existsByEmail(createUserDto.getEmail())) {
             throw new DuplicateKeyException(ErrorCode.USER_DUPLICATE.getMessage());
         }
 
         final User user = User.builder()
-            .email(request.getEmail())
-            .name(request.getName())
-            .nickname(request.getNickname())
-            .password(request.getPassword())
-            .phoneNumber(request.getPhoneNumber())
+            .email(createUserDto.getEmail())
+            .name(createUserDto.getName())
+            .nickname(createUserDto.getNickname())
+            .password(bCryptPasswordEncoder.encode(createUserDto.getPassword()))
+            .phoneNumber(createUserDto.getPhoneNumber())
             .registDtm(LocalDateTime.now())
             .role(Role.ROLE_USER)
             .build();
 
         return userRepository.save(user);
+    }
+
+    public void validatePassword(final String inputPassword, final String password) {
+        boolean matches = bCryptPasswordEncoder.matches(inputPassword, password);
+        if (!matches) {
+            throw new InputMismatchException(ErrorCode.PASSWORD_MISMATCH.getMessage());
+        }
     }
 
 }
