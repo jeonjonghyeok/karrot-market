@@ -1,11 +1,11 @@
 package com.numble.karrotmarket.auth.controller;
 
-import com.numble.karrotmarket.auth.service.AuthService;
 import com.numble.karrotmarket.auth.controller.dto.SignInRequest;
 import com.numble.karrotmarket.auth.controller.dto.SignUpRequest;
+import com.numble.karrotmarket.auth.service.AuthService;
 import com.numble.karrotmarket.user.domain.User;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +19,12 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public User signup(@RequestBody @Validated SignUpRequest request) {
+    public User signup(@RequestBody @Valid SignUpRequest request) {
         return authService.signup(request);
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody @Validated SignInRequest request) {
+    public String login(@RequestBody @Valid SignInRequest request) {
         return authService.login(request);
     }
 
