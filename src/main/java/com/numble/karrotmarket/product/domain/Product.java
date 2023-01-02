@@ -13,13 +13,13 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "seq", nullable = false)
+    @Column(name = "seq", updatable = false, nullable = false)
     private Long seq;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "content")
+    @Column(name = "content", nullable = false)
     private String content;
 
 }
