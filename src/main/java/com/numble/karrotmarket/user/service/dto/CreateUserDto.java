@@ -1,4 +1,4 @@
-package com.numble.karrotmarket.user.dto;
+package com.numble.karrotmarket.user.service.dto;
 
 import com.numble.karrotmarket.auth.controller.dto.SignUpRequest;
 import lombok.Builder;

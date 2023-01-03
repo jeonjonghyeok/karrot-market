@@ -3,9 +3,8 @@ package com.numble.karrotmarket.user.service;
 import com.numble.karrotmarket.common.exception.error.ErrorCode;
 import com.numble.karrotmarket.user.domain.Role;
 import com.numble.karrotmarket.user.domain.User;
-import com.numble.karrotmarket.user.dto.CreateUserDto;
 import com.numble.karrotmarket.user.repository.UserRepository;
-import java.time.LocalDateTime;
+import com.numble.karrotmarket.user.service.dto.CreateUserDto;
 import java.util.InputMismatchException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
@@ -36,7 +35,6 @@ public class UserService {
             .nickname(createUserDto.getNickname())
             .password(bCryptPasswordEncoder.encode(createUserDto.getPassword()))
             .phoneNumber(createUserDto.getPhoneNumber())
-            .registDtm(LocalDateTime.now())
             .role(Role.ROLE_USER)
             .build();
 

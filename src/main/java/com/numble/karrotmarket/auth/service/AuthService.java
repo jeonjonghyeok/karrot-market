@@ -4,7 +4,7 @@ import com.numble.karrotmarket.auth.controller.dto.SignInRequest;
 import com.numble.karrotmarket.auth.controller.dto.SignUpRequest;
 import com.numble.karrotmarket.common.component.jwt.JwtTokenProvider;
 import com.numble.karrotmarket.user.domain.User;
-import com.numble.karrotmarket.user.dto.CreateUserDto;
+import com.numble.karrotmarket.user.service.dto.CreateUserDto;
 import com.numble.karrotmarket.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
