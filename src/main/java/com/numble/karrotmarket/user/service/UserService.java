@@ -4,7 +4,7 @@ import com.numble.karrotmarket.common.exception.error.ErrorCode;
 import com.numble.karrotmarket.user.domain.Role;
 import com.numble.karrotmarket.user.domain.User;
 import com.numble.karrotmarket.user.repository.UserRepository;
-import com.numble.karrotmarket.user.service.dto.CreateUserDto;
+import com.numble.karrotmarket.user.service.vo.CreateUserVo;
 import java.util.InputMismatchException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
@@ -24,17 +24,17 @@ public class UserService {
             new UsernameNotFoundException(ErrorCode.USER_NOT_FOUND.getMessage()));
     }
 
-    public User createUser(final CreateUserDto createUserDto) {
-        if (userRepository.existsByEmail(createUserDto.getEmail())) {
+    public User createUser(final CreateUserVo createUserVo) {
+        if (userRepository.existsByEmail(createUserVo.getEmail())) {
             throw new DuplicateKeyException(ErrorCode.USER_DUPLICATE.getMessage());
         }
 
         final User user = User.builder()
-            .email(createUserDto.getEmail())
-            .name(createUserDto.getName())
-            .nickname(createUserDto.getNickname())
-            .password(bCryptPasswordEncoder.encode(createUserDto.getPassword()))
-            .phoneNumber(createUserDto.getPhoneNumber())
+            .email(createUserVo.getEmail())
+            .name(createUserVo.getName())
+            .nickname(createUserVo.getNickname())
+            .password(bCryptPasswordEncoder.encode(createUserVo.getPassword()))
+            .phoneNumber(createUserVo.getPhoneNumber())
             .role(Role.ROLE_USER)
             .build();
 

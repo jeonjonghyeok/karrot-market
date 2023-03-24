@@ -17,7 +17,7 @@ public interface ProductDtoMapper {
     @BaseMapping
     @Mapping(target = "seq", ignore = true)
     @Mapping(target = "status", ignore = true)
-    Product toProduct(ProductCreationRequest source);
+    Product toProduct(ProductCreationRequest source, Long sellerId);
 
     @Named("toProductResponse")
     ProductResponse toProductResponse(Product source);

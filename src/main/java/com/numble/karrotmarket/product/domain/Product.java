@@ -1,22 +1,18 @@
 package com.numble.karrotmarket.product.domain;
 
+import com.numble.karrotmarket.common.base.BaseTimeEntity;
 import com.numble.karrotmarket.product.domain.constants.ProductStatus;
 import com.numble.karrotmarket.product.domain.converter.ProductStatusConverter;
-import com.numble.karrotmarket.common.base.BaseTimeEntity;
 import com.numble.karrotmarket.product.domain.listener.ProductListener;
-import com.numble.karrotmarket.user.domain.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,13 +35,8 @@ public class Product extends BaseTimeEntity {
     private Long seq;
 
     @Comment("판매자일련번호")
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false, updatable = false)
-    private User seller;
-
-    @Setter
-    private long sellerId;
+    @Column(name = "seller_id", updatable = false, nullable = false)
+    private Long sellerId;
 
     @Comment("장소")
     @Column(name = "location", nullable = false)

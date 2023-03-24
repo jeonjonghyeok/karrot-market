@@ -22,7 +22,7 @@ public class SpringSecurityConfig {
     private final JwtTokenProvider jwtTokenProvider;
 
     private static final String[] AUTH_WHITELIST = {
-        "/", "/v1/auth/**"
+        "/", "/v1/auth/**", "/room/**"
     };
 
     @Bean
