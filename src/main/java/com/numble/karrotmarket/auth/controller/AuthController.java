@@ -4,6 +4,7 @@ import com.numble.karrotmarket.auth.controller.dto.SignInRequest;
 import com.numble.karrotmarket.auth.controller.dto.SignUpRequest;
 import com.numble.karrotmarket.auth.service.AuthService;
 import com.numble.karrotmarket.user.domain.User;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,11 +19,13 @@ public class AuthController {
 
     private final AuthService authService;
 
+    @Operation(summary = "회원가입", description = "회원가입", tags = { "Auth Controller" })
     @PostMapping("/signup")
     public User signup(@RequestBody @Valid SignUpRequest request) {
         return authService.signup(request);
     }
 
+    @Operation(summary = "로그인", description = "로그인", tags = { "Auth Controller" })
     @PostMapping("/login")
     public String login(@RequestBody @Valid SignInRequest request) {
         return authService.login(request);
